@@ -1,0 +1,44 @@
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bookings";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
+
+// Fetch data from the bookings table
+$sql = "SELECT * FROM booking";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    echo "<table border='1'>
+            <tr>
+                
+                <th>Name</th>
+                <th>Email</th>
+                <th>Destination</th>
+                <th>Departure Date</th>
+                <th>Return Date</th>
+            </tr>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+              
+                <td>" . $row["name"] . "</td>
+                <td>" . $row["email"] . "</td>
+                <td>" . $row["destination"] . "</td>
+                <td>" . $row["departure_date"] . "</td>
+                <td>" . $row["return_date"] . "</td>
+              </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No bookings found";
+}
+
+$conn->close();
+?>
