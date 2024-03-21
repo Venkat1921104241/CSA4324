@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login - Online Bookstore Management System</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #333;
+            color: #ece7e7;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #7c7878;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Login</h2>
+        <form action="#" method="post" id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <div id="usernameError" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <div id="phoneError" class="error"></div>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            var usernameInput = document.getElementById('username');
+            var usernameError = document.getElementById('usernameError');
+            var emailInput = document.getElementById('email');
+            var emailError = document.getElementById('emailError');
+            var phoneInput = document.getElementById('phone');
+            var phoneError = document.getElementById('phoneError');
+            var passwordInput = document.getElementById('password');
+
+            var username = usernameInput.value.trim();
+            var email = emailInput.value.trim();
+            var phone = phoneInput.value.trim();
+            var password = passwordInput.value.trim();
+
+            // Regular expression to check if the username contains only letters
+            var lettersOnly = /^[A-Za-z]+$/;
+            // Regular expression to validate email
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Regular expression to validate phone number
+            var phonePattern = /^\d{10}$/; // Phone number should consist of 10 digits
+
+            // Username validation
+            if (!lettersOnly.test(username)) {
+                usernameError.textContent = 'Username must contain only letters';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                usernameError.textContent = ''; // Clear error message if valid
+            }
+
+            // Email validation
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Please enter a valid email address';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                emailError.textContent = ''; // Clear error message if valid
+            }
+
+            // Phone number validation
+            if (!phonePattern.test(phone)) {
+                phoneError.textContent = 'Please enter a 10-digit phone number';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                phoneError.textContent = ''; // Clear error message if valid
+            }
+        });
+    </script>
+</body>
+</html>
